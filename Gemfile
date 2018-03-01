@@ -48,5 +48,6 @@ gem 'mini_magick', '~> 4.8'
 gem 'carrierwave-aws', '~> 1.3'
 gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
 gem 'fog'
+gem 'kaminari'
 
 ruby "2.4.1"
