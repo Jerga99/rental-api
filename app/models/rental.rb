@@ -19,10 +19,12 @@ class Rental < ApplicationRecord
   end
 
   def self.find_by_city params
-    if params[:city]
-      where("city like ?", "#{params[:city]}%")
+    page = (params[:page] || 1).to_i
+
+    if params[:city] && !params[:city].empty?
+      self.page(1).per(params[:per_page]).where("lower(city) like lower(?)", "#{params[:city]}%")
     else
-      Rental.all
+      self.page(page).per(params[:per_page])
     end
   end
 

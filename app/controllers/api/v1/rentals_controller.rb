@@ -11,8 +11,8 @@ class Api::V1::RentalsController < ApiController
       @rentals = Rental.find_by_user @user
       render json: @rentals.includes(:bookings), include: ['bookings'], each_serializer: RentalSerializer
     else
-      render json: Rental.find_by_city(params).includes(:user), include: ['user'], each_serializer: RentalSerializer
-      # render json: Rental.includes(:user), include: ['user'], each_serializer: RentalSerializer
+      @rentals = Rental.find_by_city(params)
+      render json: @rentals.includes(:user), meta: {total_pages: @rentals.total_pages}, include: ['user'], each_serializer: RentalSerializer
     end
   end
 
